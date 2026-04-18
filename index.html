@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Quotation - NY Code</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #2c3e50;
+            
+        }
+
+        .quotation-card {
+            background-color: #fff;
+            max-width: 850px;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            min-height: 1050px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background-color: #2c3e50;
+            color: #ffffff;
+           padding: 17px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .dev-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 8px 0 2px 0;
+        }
+
+        .dev-title {
+            font-size: 14px;
+            color: #bdc3c7;
+            margin: 0;
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Content Area */
+        .main-content {
+          padding: 20px 50px;
+        }
+
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 13px;
+        }
+
+        .info-column {
+            width: 45%;
+        }
+
+        .info-column.right {
+            text-align: right;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        .input-line {
+            border-bottom: 1px solid #bdc3c7;
+            height: 25px;
+            margin-bottom: 5px;
+        }
+
+        /* Table Customization */
+        .section-title {
+            font-size: 18px;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            text-align: left;
+            padding: 12px;
+            font-size: 12px;
+            border-bottom: 2px solid #dee2e6;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        .fixed-price-box {
+            border-bottom: 1px dashed #2c3e50;
+            width: 120px;
+            display: inline-block;
+            height: 18px;
+        }
+
+        .price-range {
+            color: #95a5a6;
+            font-size: 11px;
+            display: block;
+        }
+
+        .text-right { text-align: right; }
+
+        /* Terms */
+        .terms-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #2c3e50;
+            margin-top: 10px;
+        }
+
+        .terms-section h3 {
+            margin-top: 0;
+            font-size: 15px;
+        }
+
+        .terms-section ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+
+        .terms-section li {
+            margin-bottom: 6px;
+        }
+
+        /* Signatures */
+        .signature-section {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sig-box {
+            width: 40%;
+        }
+
+        .sig-line {
+            border-top: 2px solid #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .sig-sub {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: -10px;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #bdc3c7;
+        }
+        /* Styling for the button */
+.save-btn {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+    transition: background 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #34495e;
+}
+
+/* CRITICAL: This hides the button when the PDF is being generated */
+@media print {
+    /* Hide the browser's default headers and footers */
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .quotation-card {
+        box-shadow: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        min-height: 100vh; /* Adjusts to full page height */
+        padding-bottom: 20px;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Adjust layout spacing to be tighter */
+.main-content {
+    padding: 20px 50px; /* Reduced from 40px to save vertical space */
+}
+
+.header {
+    padding: 30px 50px; /* Reduced from 40px */
+}
+
+.table-section {
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+    </style>
+   <script>
+    function saveAsPDF() {
+        // Change the title temporarily to set the PDF filename
+        const originalTitle = document.title;
+        document.title = "NY_Code_Quotation_Nachikket_Yadav";
+        
+        // Trigger the browser print dialog
+        window.print();
+        
+        // Restore the original page title
+        document.title = originalTitle;
+    }
+</script>
+</head>
+<body>
+    
+    <div class="quotation-card">
+    <header class="header">
+    <div class="header-content">
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="assets/img/NYCoodeilogo.png" alt="NY Code Logo" style="height: 50px; width: auto; margin-right: 15px;">
+            <span class="brand-logo" style="font-weight: 900; font-size: 20px;">NY Coode</span>
+        </div>
+        
+        <h1>Service Quotation</h1>
+        <p class="dev-name">Nachikket Yadav</p>
+        <p class="dev-title" style="font-weight: 900;">Software Developer</p>
+    </div>
+    <div class="header-meta">
+        <p style="font-weight: 900;">Nagpur, Maharashtra</p>
+        <p style="font-weight: 900;">Email: nachikketyadav@gmail.com</p>
+    </div>
+</header>
+
+        <div class="main-content">
+            <section class="info-section">
+                <div class="info-column">
+                    <label>Client Name / Organization</label>
+                    <div class="input-line"></div>
+                    
+                    <label>Project Reference</label>
+                    <div class="input-line"></div>
+                </div>
+                <div class="info-column right">
+                    <label>Date of Issue</label>
+                    <div class="input-line"></div>
+                    
+                    <label>Quote Status</label>
+                    <div style="font-weight: bold; margin-top: 5px;">PROPOSAL</div>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <h2 class="section-title">Project Scope & Final Pricing</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Service Category</th>
+                            <th style="width: 40%;">Standard Range</th>
+                            <th style="width: 35%; text-align: right;">Actual Fixed Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tbody>
+    <tr>
+        <td><strong>Static Website</strong></td>
+        <!-- <td><span class="price-range"><strong>₹10,000 - ₹15,000</strong></span></td> -->
+         <td><strong>₹10,000 - ₹15,000</strong></td>
+        <td class="text-right">₹ <div class="fixed-price-box"></div></td>
+    </tr>
+    <tr>
+        <td><strong>Dynamic Website</strong></td>
+          <td><strong>₹30,000 - ₹50,000</strong></td>
+        <!-- <td><span class="price-range"><strong>₹30,000 - ₹50,000</strong></span></td> -->
+        <td class="text-right">₹ <div class="fixed-price-box"></div></td>
+    </tr>
+    <tr>
+        <td><strong>E-commerce</strong></td>
+          <td><strong>60,000 - ₹1,20,000</strong></td>
+        <!-- <td><span class="price-range"><strong>₹60,000 - ₹1,20,000</strong></span></td> -->
+        <td class="text-right">₹ <div class="fixed-price-box"></div></td>
+    </tr>
+    <tr>
+        <td><strong>Custom Software</strong></td>
+          <td><strong>Based on Modules</strong></td>
+        <!-- <td><span class="price-range"><strong>Based on Modules</strong></span></td> -->
+        <td class="text-right">₹ <div class="fixed-price-box"></div></td>
+    </tr>
+    <tr>
+        <td><strong>Domain & Hosting</strong></td>
+          <td><strong>₹6,000 / Annual</strong></td>
+        <!-- <td><span class="price-range"><strong>₹6,000 / Annual</strong></span></td> -->
+        <td class="text-right">₹ <div class="fixed-price-box"></div></td>
+    </tr>
+</tbody>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="terms-section">
+                <h3>Terms & Conditions</h3>
+                <ul>
+                    <li><strong>Payment Policy:</strong> 50% advance to start, 30% on design, 20% on deployment.</li>
+                    <li><strong>Maintenance:</strong> 90 days of free technical support post-launch.</li>
+                    <li><strong>Asset Delivery:</strong> Client provides branding (Logos/Text/Images) for development.</li>
+                    <!-- <li><strong>Validity:</strong> This quotation is officially valid for 30 days.</li> -->
+                </ul>
+            </section>
+
+            <section class="signature-section">
+                <div class="sig-box">
+                    <div class="sig-line"></div>
+                    <p><strong>Nachikket Yadav</strong></p>
+                    <p class="sig-sub">Software Developer (NY Code)</p>
+                </div>
+                <div class="sig-box">
+                    <div class="sig-line"></div>
+                    <p><strong>Authorized Client</strong></p>
+                    <p class="sig-sub">Signature & Date</p>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+
+    <div class="no-print" style="text-align: right; padding: 20px 50px 0 0;">
+    <button onclick="saveAsPDF()" class="save-btn">
+        Save as PDF
+    </button>
+</div>
+</body>
+</html>
